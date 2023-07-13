@@ -665,8 +665,10 @@ class AOVHelper:
         for i in range(0, aovCnt):
             aov = aovs[i]
             aov_enabled = aov.GetParameter(c4d.REDSHIFT_AOV_ENABLED)
-            aov_name = aov.GetParameter(c4d.REDSHIFT_AOV_NAME)
             aov_type = aov.GetParameter(c4d.REDSHIFT_AOV_TYPE)
+            aov_name = aov.GetParameter(c4d.REDSHIFT_AOV_NAME)
+            if len(aov_name) == 0:
+                aov_name = REDSHIFT_AOVS_NAME[aov_type]           
             aov_muti_enabled = aov.GetParameter(c4d.REDSHIFT_AOV_MULTIPASS_ENABLED)
             aov_bit_depth = aov.GetParameter(c4d.REDSHIFT_AOV_MULTIPASS_BIT_DEPTH)
             aov_dir_output = aov.GetParameter(c4d.REDSHIFT_AOV_ENABLED)
