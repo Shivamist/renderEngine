@@ -686,31 +686,40 @@ class AOVHelper:
             
             # Z-Depth
             if aov_type == c4d.REDSHIFT_AOV_TYPE_DEPTH:
-                aov_subdata = [
-                    aov[c4d.REDSHIFT_AOV_FILTER_TYPE],
-                    aov[c4d.REDSHIFT_AOV_DEPTH_MODE],
-                    aov[c4d.REDSHIFT_AOV_DEPTH_USE_CAMERA_NEAR_FAR],
-                    aov[c4d.REDSHIFT_AOV_DEPTH_MIN], 
-                    aov[c4d.REDSHIFT_AOV_DEPTH_MAX],
-                    aov[c4d.REDSHIFT_AOV_ENVIRONMENT_RAYS_TO_BLACK]
-                    ]
+                try:
+                    aov_subdata = [
+                        aov[c4d.REDSHIFT_AOV_FILTER_TYPE],
+                        aov[c4d.REDSHIFT_AOV_DEPTH_MODE],
+                        aov[c4d.REDSHIFT_AOV_DEPTH_USE_CAMERA_NEAR_FAR],
+                        aov[c4d.REDSHIFT_AOV_DEPTH_MIN], 
+                        aov[c4d.REDSHIFT_AOV_DEPTH_MAX],
+                        aov[c4d.REDSHIFT_AOV_ENVIRONMENT_RAYS_TO_BLACK]
+                        ]
+                except TypeError:
+                    aov_subdata = None
             # Cryptomatte
             if aov_type == c4d.REDSHIFT_AOV_TYPE_CRYPTOMATTE:
-                aov_subdata = [
-                    aov.GetParameter(c4d.REDSHIFT_AOV_CRYPTOMATTE_TYPE),
-                    aov.GetParameter(c4d.REDSHIFT_AOV_CRYPTOMATTE_USER_ATTRIBUTE),
-                    aov.GetParameter(c4d.REDSHIFT_AOV_CRYPTOMATTE_DEPTH),
-                    aov.GetParameter(c4d.REDSHIFT_AOV_CRYPTOMATTE_TYPE),
-                    ]      
+                try:
+                    aov_subdata = [
+                        aov.GetParameter(c4d.REDSHIFT_AOV_CRYPTOMATTE_TYPE),
+                        aov.GetParameter(c4d.REDSHIFT_AOV_CRYPTOMATTE_USER_ATTRIBUTE),
+                        aov.GetParameter(c4d.REDSHIFT_AOV_CRYPTOMATTE_DEPTH),
+                        aov.GetParameter(c4d.REDSHIFT_AOV_CRYPTOMATTE_TYPE),
+                        ]
+                except TypeError:
+                    aov_subdata = None      
             # Puzzle
             if aov_type == c4d.REDSHIFT_AOV_TYPE_PUZZLE_MATTE:
-                aov_subdata = [
-                    aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_MODE],
-                    aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_RED_ID],
-                    aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_GREEN_ID],
-                    aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_BLUE_ID], 
-                    aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_REFLECTION_REFRACTION]
-                    ]         
+                try:
+                    aov_subdata = [
+                        aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_MODE],
+                        aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_RED_ID],
+                        aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_GREEN_ID],
+                        aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_BLUE_ID], 
+                        aov[c4d.REDSHIFT_AOV_PUZZLE_MATTE_REFLECTION_REFRACTION]
+                        ]  
+                except TypeError:
+                    aov_subdata = None       
             
             # Aov data
             aovs.append(RedshiftAOVData(aov_shader = aov,
